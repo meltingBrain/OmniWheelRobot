@@ -1,0 +1,86 @@
+Font Utf-8
+オムニホイールロボットをUDP通信で駆動させるためのプログラム
+
+実行手順
+  1. ターミナル上でフォルダ「OmniWheelRobot」へ移動
+  2.“sudo pigpiod” をターミナルに入力
+  3. フォルダ「config」内の「UDPconfig.txt」を次のように上書き
+      ・1行目:送信元のIPアドレス(もしくは 0.0.0.0←推奨)
+      ・2行目:送信元で指定したポート番号
+  4. フォルダ「OmniWheelRobot」内でターミナルに”./OmniRobotGoGo”を入力
+  5. ターミナルの表示が高速で更新されるようになるまで待機(20~30秒位)
+
+コンパイル手順
+  1.ターミナル上でフォルダ「OmniWheelRobot」へ移動
+  2.ターミナルに“make” を入力
+
+make cleanコマンドについて
+ 現存する.oファイルと実行ファイルを消すためのコマンド
+ 依存関係や実行結果がおかしくなったら試しに実行してみること.
+ 実行後は再度'make'で実行ファイルが再生成される. 
+
+ 手順
+  1.ターミナル上でフォルダ「OmniWheelRobot」へ移動
+  2.ターミナルに“make clean” を入力
+
+ファイル構成
+	├── 00_readme.jpg ：KIT-IDEALS
+	├── 01_readme.txt　:歌詞カード
+	├── 02_readme.mp3　：校歌
+	├── Makefile       :ビルドするため
+	├── OmniRobotGoGo  : 実行ファイル(ないときもある、なかったら端末で make と入力)
+	├── archive
+	│   ├── Makefile
+	│   ├── bin
+	│   │   ├── ADS1256.o
+	│   │   └── DEV_Config.o
+	│   ├── libads1256.a
+	│   ├── obj
+	│   │   ├── ADS1256.cpp
+	│   │   ├── ADS1256.hpp
+	│   │   ├── DEV_Config.cpp
+	│   │   ├── DEV_Config.hpp
+	│   │   └── Debug.hpp
+	│   ├── readme.txt
+	│   └── 漢のreadme.txt
+	├── bin ##オブジェクトファイル##
+	│   ├── MotorDrive.o
+	│   ├── OmniRobot.o
+	│   ├── TeamSpirit.o
+	│   ├── TextReader.o
+	│   └── UDP.o
+	├── config
+	│   ├── PID_GAIN_POSITION.txt :位置型PID用ゲイン
+	│   ├── PID_GAIN_VELOCITY.txt :速度型PID用ゲイン
+	│   ├── UDP_CONFIG.txt        :UDP通信の設定
+	│   └── readme.txt
+	├── obj ##ソース、ヘッダー##
+	│   ├── AkashicRecords_Genesis.hpp :csvファイルへの書き込について
+	│   ├── MotorDrive.cpp             :モータのPWM駆動について
+	│   ├── MotorDrive.hpp
+	│   ├── OmniRobot.cpp              :オムニロボットの制御、駆動について(本プログラムの本体)
+	│   ├── OmniRobot.hpp
+	│   ├── MultiProcess.cpp             :マルチプロセスの制御とプロセス間(UDP-OmniRobot)通信について
+	│   ├── MultiProcess.hpp
+	│   ├── TextReader.cpp　　　　　　　　: ./config 内のテキスト群の読み込みについて
+	│   ├── TextReader.hpp
+	│   ├── UDP.cpp　　　　　　　　　　　　：UDP無線通信について
+	│   └── UDP.hpp
+	├── plotter ##CSVファイルの読み込みとプロット##
+	│   ├── AkashicRecords  :実行ファイ:CSVファイルの入出力先、禁忌ル(ないときもある、なかったら端末で make と入力)
+	│   ├── Forbidden ##禁忌##      
+	│   │   └── akashi.csv  :CSVファイルの入出力先
+	│   ├── Makefile
+	│   ├── akashi.csv      :偽物のゴミ
+	│   ├── bin
+	│   │   ├── AkashicRecords.o
+	│   │   └── main.o
+	│   ├── image
+	│   │   └── T1_T3.png
+	│   └── obj
+	│       ├── AkashicRecords.cpp
+	│       ├── AkashicRecords.hpp
+	│       ├── main.cpp
+	│       └── matplotlibcpp.h　：プロットライブラリ、ネットの海の漂流物
+	└── readme_コピー.txt : This
+
